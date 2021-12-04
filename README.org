@@ -1,0 +1,104 @@
+#+PROPERTY: header-args:j :tangle aoc2021.ijs
+#+TITLE: Advent of Code 2021
+* Using J to solve Advent of Code
+Typically, Advent of Code (https://adventofcode.com/2021) starts of relatively easy, but progresses with ever-more-complex problems.
+I won't be trying to get on the public leaderboard, because that's too stressful, and 12:00 EST is past my bedtime.
+I may not attempt every problem this year, but I do plan to try at least a couple that are more VM-ish or state-machine-y.
+Maybe this'll be the year I finally use J's sequential machine for something.
+* Solutions
+** Day 1
+Very array oriented, and lovely that the part 2 solution was just a minor edit to part 2.
+#+BEGIN_SRC j
+NB. https://adventofcode.com/2021
+d01p1=:+/2</\    ".&>cutLF fread'1.txt'
+d01p2=:+/2</\3+/\".&>cutLF fread'1.txt'
+#+END_SRC
+
+** Day 2
+Part 2 was more fiddly than Part 1, as expected.
+Tried a tacit solution which I didn't like very much, before ending up at this version using temp variables.
+#+begin_src j
+d02p1=:x:*/+/+.+/                   (".@{:*(0j1^i:1)*'ufd'={.);._2]1!:1<'2.txt'
+d02p2=:x:*/+/a,.a*+/\b+c['a b c'=:|:(".@{:*1 _1 1*'fud'={.);._2]1!:1<'2.txt'
+#+end_src
+
+** Day 3
+Part 1: fine.
+Part 2 felt strongly recursive or iterative, and I'm more comfortable with iteration in J, hence the while loop.
+Writing a loop in J feels very wrong.
+
+Explicit adverb helped cut down the size of the solution, but [ZippyMagician](https://github.com/ZippyMagician/ayr) suggested I could use converge (~^:_~), which is probably true.
+Maybe when I get more time I'll come back to this problem to do a less loopy version.
+#+begin_src j
+d03p1=:*/#.(,:-.)>/(+/"2@,:-.)"."0;._2]1!:1<'3.txt'
+d03p2=:{{c=.{{while.1<#y do.y=.y#~(x{"1 y)=x{u/(+/"2@,:-.)y
+ x=.>:x end.#.y}}
+((0>:c])*0<c])"."0;._2 y}}1!:1<'3.txt'
+#+end_src
+
+* Pending :noexport:
+NB. d04p1=:
+NB. d04p2=:
+
+NB. d05p1=:
+NB. d05p2=:
+
+NB. d06p1=:
+NB. d06p2=:
+
+NB. d07p1=:
+NB. d07p2=:
+
+NB. d08p1=:
+NB. d08p2=:
+
+NB. d09p1=:
+NB. d09p2=:
+
+NB. d10p1=:
+NB. d10p2=:
+
+NB. d11p1=:
+NB. d11p2=:
+
+NB. d12p1=:
+NB. d12p2=:
+
+NB. d13p1=:
+NB. d13p2=:
+
+NB. d14p1=:
+NB. d14p2=:
+
+NB. d15p1=:
+NB. d15p2=:
+
+NB. d16p1=:
+NB. d16p2=:
+
+NB. d17p1=:
+NB. d17p2=:
+
+NB. d18p1=:
+NB. d18p2=:
+
+NB. d19p1=:
+NB. d19p2=:
+
+NB. d20p1=:
+NB. d20p2=:
+
+NB. d21p1=:
+NB. d21p2=:
+
+NB. d22p1=:
+NB. d22p2=:
+
+NB. d23p1=:
+NB. d23p2=:
+
+NB. d24p1=:
+NB. d24p2=:
+
+NB. d25p1=:
+NB. d25p2=:
