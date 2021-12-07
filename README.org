@@ -46,70 +46,10 @@ mm =: m{{q=.0$0 for_i.i.#x do.q=.q,<(,(1)=+/)+./"1((5=+/"1)+.5=+/"2)+/(i{.x)="0 
 wb =: b{~{.I.-.*/}:"1 mm{~(,<:)w=:{.I.{:"1 mm
 d04p2 =: ((<:w){m)*+/,wb*-.+/(w{.m)="0 _ wb
 #+end_src
-
-# * Pending :noexport:
-# NB. d04p1=:
-# NB. d04p2=:
-
-# NB. d05p1=:
-# NB. d05p2=:
-
-# NB. d06p1=:
-# NB. d06p2=:
-
-# NB. d07p1=:
-# NB. d07p2=:
-
-# NB. d08p1=:
-# NB. d08p2=:
-
-# NB. d09p1=:
-# NB. d09p2=:
-
-# NB. d10p1=:
-# NB. d10p2=:
-
-# NB. d11p1=:
-# NB. d11p2=:
-
-# NB. d12p1=:
-# NB. d12p2=:
-
-# NB. d13p1=:
-# NB. d13p2=:
-
-# NB. d14p1=:
-# NB. d14p2=:
-
-# NB. d15p1=:
-# NB. d15p2=:
-
-# NB. d16p1=:
-# NB. d16p2=:
-
-# NB. d17p1=:
-# NB. d17p2=:
-
-# NB. d18p1=:
-# NB. d18p2=:
-
-# NB. d19p1=:
-# NB. d19p2=:
-
-# NB. d20p1=:
-# NB. d20p2=:
-
-# NB. d21p1=:
-# NB. d21p2=:
-
-# NB. d22p1=:
-# NB. d22p2=:
-
-# NB. d23p1=:
-# NB. d23p2=:
-
-# NB. d24p1=:
-# NB. d24p2=:
-
-# NB. d25p1=:
-# NB. d25p2=:
+** Day 7
+#+begin_src j
+f =: ,>cutLF fread'7.txt'
+d07p1 =: {{<./+/y(|@-)"0 1 y}}f
+ii =: [:+/>:@i.
+d07p2 =: {{ +/ii"0 |y-{./:+/y (ii@|@-)"0 _ i.>./y}}f
+#+end_src
