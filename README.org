@@ -47,9 +47,10 @@ wb =: b{~{.I.-.*/}:"1 mm{~(,<:)w=:{.I.{:"1 mm
 d04p2 =: ((<:w){m)*+/,wb*-.+/(w{.m)="0 _ wb
 #+end_src
 ** Day 7
+This one turned out to be farily nice.
 #+begin_src j
-f =: ,>cutLF fread'7.txt'
+f =: ".,>cutLF fread'7.txt'
 d07p1 =: {{<./+/y(|@-)"0 1 y}}f
 ii =: [:+/>:@i.
-d07p2 =: {{ +/ii"0 |y-{./:+/y (ii@|@-)"0 _ i.>./y}}f
+d07p2 =: {{+/ii"0|y-{./:+/y ii@|@-"0 _ i.>./y}}f
 #+end_src
