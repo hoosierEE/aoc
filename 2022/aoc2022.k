@@ -13,7 +13,7 @@ p2: +/3#{x@>x}(.'"++"\"+"/0:"1.txt")
 \d d2
 /using a very dict-oriented approach for part 1
 s: "XYZ"!1 2 3 /shape score dictionary
-w: ("A Y";"B Z";"C X")!3#1 /winning moves
+w: ("A Y";"B Z";"C X")!1 /winning moves
 d: "XYZ"!"ABC" /draw
 p1: +/{p:*|x;((+/s x)+(3*(*x)~d@p)+6*w x)}'0:"2.txt"
 
@@ -21,12 +21,12 @@ p1: +/{p:*|x;((+/s x)+(3*(*x)~d@p)+6*w x)}'0:"2.txt"
 s: "ABC"!1 2 3 /shape score
 g: "XYZ"!(("ABC"!"CAB");("ABC"!"ABC");("ABC"!"BCA")) /game: g["X"]["A"] means "lose against A" thus returns C
 w: "XYZ"!0 3 6 /lose win draw dict
-p2:  +/{p:*|x;(w p)+s(g p)@*x}'0:"2.txt"
+p2: +/{w[p]+s(g p:*|x)@*x}'0:"2.txt"
 \d .
 
+
 \d d3
-c: {{y@*&0N<x?/:y}/(0N,_0.5*#x)#x} /common letter in each line
 p: {$[x<"a";x-38;x-96]} /case-based score
-p1: +/{p c x}'0:"3.txt"
-p2: +/p'(*{?x@(0N<)#x?/:y}/)'0N 3#0:"3.txt"
+p1: +/{p@{*(^x?)_y}/2 0N#x}'0:"3.txt" /common letter in each line
+p2: +/(p@*{x(0N=)_x?y}/)'0N 3#0:"3.txt"
 \d .
