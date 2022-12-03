@@ -1,5 +1,5 @@
 /
-To see solutions, load this file then inspect d1.p1 etc.
+https://adventofcode.com/2022/
 \
 
 \d d1
@@ -22,4 +22,11 @@ s: "ABC"!1 2 3 /shape score
 g: "XYZ"!(("ABC"!"CAB");("ABC"!"ABC");("ABC"!"BCA")) /game: g["X"]["A"] means "lose against A" thus returns C
 w: "XYZ"!0 3 6 /lose win draw dict
 p2:  +/{p:*|x;(w p)+s(g p)@*x}'0:"2.txt"
+\d .
+
+\d d3
+c: {{y@*&0N<x?/:y}/(0N,_0.5*#x)#x} /common letter in each line
+p: {$[x<"a";x-38;x-96]} /case-based score
+p1: +/{p c x}'0:"3.txt"
+p2: +/p'(*{?x@(0N<)#x?/:y}/)'0N 3#0:"3.txt"
 \d .
