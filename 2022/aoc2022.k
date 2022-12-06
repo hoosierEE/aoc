@@ -36,3 +36,28 @@ p2: +/(p@*{x(0N=)_x?y}/)'0N 3#0:"3.txt"
 p1: +/({(((#y)=+/~^x?y)|(#x)=+/~^y?x)}/({x+!(y+1-x)}/ .' "-"\)'","\)'0:"4.txt"
 p2: +/({|/~^x?y}/(({x+!(y+1-x)}/.' "-"\)'","\)@)'0:"4.txt"
 \d .
+
+
+\d d5
+s: 1_?{x^" []"}'+9#0:"5.txt" /stacks
+i: 10_0:"5.txt" /instructions
+d:((-1#)'s)!-1_'s
+e:((-1#)'s)!-1_'s
+m1: {(N;a;b):(" "\x)@1 3 5;N:.N;t:|N#d[a];d[a]:N_d[a];d[b]:t,d[b]}
+m2: {(N;a;b):(" "\x)@1 3 5;N:.N;t: N#e[a];e[a]:N_e[a];e[b]:t,e[b]}
+m1'i;m2'i /update dict for each line of instructions
+(p1;p2): (*'.d;*'.e) /top of each stack
+\d .
+
+
+\d d6
+/initial solution with (':) based on ngn's suggestion:
+n:4
+p1: n++/~|\n{n=#?x}':*0:"6.txt"
+n:14;
+p2: n++/~|\n{n=#?x}':*0:"6.txt"
+
+/after reading some APL Farm inspiration (ColTim)
+f:{y++/~|\y{x~?x}':*0:x}["6.txt";]
+(p1;p2): f' 4 14
+\d .
