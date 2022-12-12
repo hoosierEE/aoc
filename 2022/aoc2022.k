@@ -1,11 +1,8 @@
 /
 https://adventofcode.com/2022/
-
-ProTip:
-"script, read thyself"
+ProTip: "script, read thyself"
 https://ngn.codeberg.page/k/#eJzT5zI2MDY35jIyNTU04jIzNTY24jI2NjWx5DI2NbY04Irh4jKM1zWM16iJqVO2UteMN7BKSCxKL1Mw5AIATgoMlg==
 \
-
 
 \d d1
 /everything right of the first dot (.) is from Garklein on The APL Farm discord:
@@ -20,7 +17,6 @@ s: "XYZ"!1 2 3 /shape score dictionary
 w: ("A Y";"B Z";"C X")!1 /winning moves
 d: "XYZ"!"ABC" /draw
 p1: +/{p:*|x;((+/s x)+(3*(*x)~d@p)+6*w x)}'0:"2.txt"
-
 /for part 2, (X:lose Y:draw Z:win), choose your play accordingly
 s: "ABC"!1 2 3 /shape score
 g: "XYZ"!(("ABC"!"CAB");("ABC"!"ABC");("ABC"!"BCA")) /game: g["X"]["A"] means "lose against A" thus returns C
@@ -42,7 +38,7 @@ p2: +/({|/~^x?y}/(({x+!(y+1-x)}/.' "-"\)'","\)@)'0:"4.txt"
 \d d5
 s: 1_?{x^" []"}'+9#0:"5.txt" /stacks
 i: 10_0:"5.txt" /instructions
-d:((-1#)'s)!-1_'s
+d: ((-1#)'s)!-1_'s
 m: {(N;a;b):(" "\y)@1 3 5;N:.N;t:x N#e[a];e[a]:N_e[a];e[b]:t,e[b]} /more help from ColTim
 e:d;m[|:;]'i; p1: *'.e
 e:d;m[::;]'i; p2: *'.e
@@ -51,69 +47,51 @@ e:d;m[::;]'i; p2: *'.e
 \d d6
 /initial solution with (':) based on ngn's suggestion:
 n:4
-p1: n++/~|\n{n=#?x}':*0:"6.txt"
+p1:n++/~|\n{n=#?x}':*0:"6.txt"
 n:14;
-p2: n++/~|\n{n=#?x}':*0:"6.txt"
+p2:n++/~|\n{n=#?x}':*0:"6.txt"
 f:{y++/~|\y{x~?x}':*0:x}["6.txt";] /after reading some APL Farm inspiration (ColTim)
 (p1;p2): f'4 14
 
 
 \d d7
-/TODO
-/ e:("$ cd /";"$ ls";"dir a";"14848514 b.txt";"8504156 c.dat";"dir d";"$ cd a";"$ ls";"dir e";"29116 f";"2557 g";"62596 h.lst";"$ cd e";"$ ls";"584 i";"$ cd ..";"$ cd ..";"$ cd d";"$ ls";"4060174 j";"8033020 d.log";"5626152 d.ext";"7214296 k")
-/
-/ my original attempt - may not account for nested directories
-cut:{"cd "\ " "/x}
-f:{$["."=*x;[v,:-1#s;s::-1_s];s,:+/0^`I$" "\x]}
-v:,0; s:!0; f'cut@e
-v:,0; s:!0; f'cut@0:"7.txt"
-\
-
-/
-/ ngn's solution from https://codeberg.org/ngn/k/raw/branch/master/aoc/22/07.k
-/ #!/usr/bin/env k
-i:0:"7.txt"
-s:,0 /stack: current sizes of ancestors of current directory
-t:!0 /total sizes of already visited directories
-/ {$["$ cd .."~x;[t,:-1#s;s::-1_s]; "$ cd "~5#x;s,:0; ~"0:"'*x;s+:.*" "\x]}'i;
-{$["$ cd .."~x;[t,:-1#s;s::-1_s]; "$ cd "~5#x;s,:0; s+:+/0^`I$" "\x]}'i;
-
-{$["$ cd .."~x;[t,:-1#s;s::-1_s] /up a directory, t,:s.pop()
-   "$ cd /" ~x;[t,: 1_s;s:: 1#s] /root
-   "$ cd "~5#x;s,:0              /any other directory, s,:0
-   ~"0:"'*x;s+:.*" "\x]}'i;      /file, add this file's size to whole stack
-t,:s / 25094 25094 238081 997631 156396 156396 230981 508888 279834 395875 33372 1106626 34310 1839741 2046254 3739140 102403 219183 219183 141177 495281 5336501 312723 6390337 271008 119088 390096 608354 183661 85871 85871 577608 2135512 58678 58678 58678 436155 1165981 622624 127844 127844 2297271 15229 185362 290023 12772 12772 12772 674735 48696 124670 194548 193706 90049 283755 1048772 2198892 498936 121726 108233 183892 34417 34417 224596 224596 551807 408203 36358 7924 190752 1375469 417697 164446 3113872 3903058 4212300 6495349 141492 141492 1037605 487638 776573 269563 198725 799927 59244 552790 126255 1045454 270481 289817 2647196 479129 249569 232389 328734 316145 316145 446294 1827527 247235 2553891 117412 301735 466990 466990 3788101 603334 98744 98744 294624 4827179 497443 305042 8679207 953933 21420854 30005381 252054 299381 222662 522043 138921 224805 1164439 60445 60445 165502 1885602 239139 239139 505240 792678 143929 128440 272369 124512 339337 463849 1768035 3785411 34676561 376261 198026 574287 119834 320007 43395 188462 199814 305736 366178 954599 132083 730062 66475 555011 224155 2392959 214776 73557 128962 260384 1520301 255325 244185 140890 140890 660778 415928 276847 1140916 3949162 572715 98803 326788 534993 253884 1176081 290671 2985130 18543
-+/(1e5>)#t       /part1 (1449447)
-&/((-4e7+*s)>)_t /part2 (8679207)
-\
-
-/ s:,0;t:!0;{$["$ cd .."~x;[t,:-1#s;s::-1_s];"$ cd "~5#x;s,:0;~"0:"'*x;s+:.*" "\x;]}'i;
-
+/I still feel like it should be possible to sum the sub-directories and somehow
+/add them to their parent, but things I tried didn't work so well.
+nope: (,0;!0){$["."=*x;(-1_s;t,-1#s);(t;+/0^`I$" "\x)]}/"cd "\ " "/0:"7.txt" /didn't work
+/This solution does work, but credit is due mostly to shadowninja55 and ngn.
 /https://github.com/shadowninja55/advent-of-code/blob/main/2022/07/7.k (shadowninja's solution)
-/ with minor optimizations (no "cd /")
-f:{(s;t):x; $["$ cd .."~y;(-1_s;t,-1#s); "$ cd"~4#y;(s,0;t); (s+0^`I$*" "\y;t)]}
-t:,/(,0;!0)f/i:0:"7.txt"
-p1:+/(1e5>)#t
-p2:&/((-4e7+|/t)>)_t
-
-/ stuff that didn't work...
-/ /sliding window(2), if last=0 push first
-/ s:1_" $ "\'"$ cd "\" "/e /split when changing directories (discard first because it is empty)
-/ / cd X => push sum of X's contents
-/ / cd .. => top of stack += pop()
-/ k:() /empty stack
-/ p: {k:((*x;0);k)} /push (name;0) on stack (name ; sum of sizes so far)
-/ m: {k[0]+:(" "\x[1])} /sum contents of current folder
-/ {} /pop (cd ..)
-
-/ s: {~^.(*x)^"$dir"}'i:" "\'0:"7.txt" /input, indices of sizes
-/ d: (*|)'(i@&~s)@-1+&{"ls"~*|x}'i@&~s /directories
+/https://codeberg.org/ngn/k/src/branch/master/aoc/22/07.k (ngn's solution)
+/with minor optimizations (no "cd /")
+f: {(s;t):x; $["$ cd .."~y;(-1_s;t,-1#s); "$ cd"~4#y;(s,0;t); (s+0^`I$*" "\y;t)]}
+t: ,/(,0;!0)f/i:0:"7.txt"
+p1: +/(1e5>)#t
+p2: &/((-4e7+|/t)>)_t
 
 
 \d d8
-i:.''0:"8.txt" /actual input
-e:.''5 5#"3037325512653323354935390" /example input
-r:4{(+|x)}\e /all rotations
+i: .''0:"8.txt" /actual input
+e: .''5 5#"3037325512653323354935390" /example input
+g: {>':'|\'x}
+e1: {~~+/{x{|+x}/g x{+|x}/y}[;x]'!4}e /inner mask for example input
+e2: {4{1,'+|x}/(({-2+(#x),#*x}x)#0)}e /outer mask for example input
+
+m1: {~~+/{x{|+x}/g x{+|x}/y}[;x]'!4}i /inner mask
+m2: {4{1,'+|x}/(({-2+(#x),#*x}x)#0)}i /outer mask
+p1: +//(m1*~m2)+~~m2
+
+/part 2 seems to need a very different approach
+/looking to the right of coordinate (x,y) can be
+/ e[;y] /column
+/ e[x;] /row
+/but I can get all the (row;column) from the inner mask e1:
+/ &~e2 /rows;columns
+/ ((r1;c1);(r2;c2);...): {(e[x 0;];e[;x 1])}'+&~e2
+/once you have a (row;col) and the index of the tree in question,
+/compute its scenic score
+/ |/(*/'({(-1+#x)&/1+&~1_x<*x}''{(r;c):y;(R;C):(x[r;];x[;c]);(|(c+1)#R;c_R;|(r+1)#C;r_C)}[e;]'+&~e2))@!9
+rc: {(r;c):y;(R;C):(x[r;];x[;c]);(|(c+1)#R;c_R;|(r+1)#C;r_C)}[i;]'+&~m2 /get (i,row;i,col) for each index
+p2: |/*/'({(-1+#x)&/1+&~1_x<*x}''rc) /compute scenic score given (index;row;col)
+
 
 
 \d d9
