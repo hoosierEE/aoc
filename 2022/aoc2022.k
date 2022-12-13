@@ -94,6 +94,11 @@ p2: |/*/'({(-1+#x)&/1+&~1_x<*x}''rc) /compute scenic score given (index;row;col)
 
 
 \d d9
+s: 5 5#0 /initial state - H and T start in its center (2;2)
+R: {&x="H"} /within grid x, move H right by y
+shp: {-1_#:'*:\x} /shape of x
+b:5 6#"........................s.TH.." /example board
+
 
 
 \d d10
