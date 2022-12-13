@@ -98,15 +98,28 @@ p2: |/*/'({(-1+#x)&/1+&~1_x<*x}''rc) /compute scenic score given (index;row;col)
 
 \d d10
 n:0
+/prepared example input (compressed to fit ngn/k repl size limit)
 e:";"\"15;-11;6;-3;5;-1;-8;13;4;n;-1;5;-1;5;-1;5;-1;5;-1;-35;1;24;-19;1;16;-11;n;n;21;-15;n;n;-3;9;1;-3;8;1;5;n;n;n;n;n;-36;n;1;7;n;n;n;2;6;n;n;n;n;n;1;n;n;7;1;n;-13;13;7;n;1;-33;n;n;n;2;n;n;n;8;n;-1;2;1;n;17;-9;1;1;-3;11;n;n;1;n;1;n;n;-13;-19;1;3;26;-30;12;-1;3;1;n;n;n;-9;18;1;2;n;n;9;n;n;n;-1;2;-37;1;3;n;15;-21;22;-6;1;n;2;1;n;-10;n;n;20;1;2;2;-6;-11;n;n;n"
 X:.'e     /raw values
 c:+\1+~~X /cycles
 +/{x*-1#1+\(*&~x>c)#X}'20 60 100 140 180 220 /example
 
-p: {+/0^`I$" "\x}
-X:p'0:"10.txt"
-c:+\1+~~X /cycles
+p: {+/0^`I$" "\x} /parse the real deal
+X: p'0:"10.txt" /parsed values
+c: +\1+~~X /cycles
 p1: +/{x*-1#1+\(*&~x>c)#X}'20 60 100 140 180 220
+
+/part2 - draw pixels on a grid
+X:.'e     /raw (example) values
+c: -1_1,/#/'+((1+~~X);1+\X) /sprite position at each cycle
+/do any of the 3 sprite pixels (centered on current position) overlap with current pixel?
+e2: ".#"0N 40#{+/'x='(!3)+/:40!!#x}@c
+
+/now for the real deal - it's off by 1 for some reason, but still legible.
+X: p'0:"10.txt" /parsed values
+c: -1_1,/#/'+((1+~~X);1+\X) /sprite position at each cycle
+p2: ".#"0N 40#{+/'x='(!3)+/:40!!#x}@c
+
 
 \d d11
 \d d12
