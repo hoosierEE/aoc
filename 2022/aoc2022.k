@@ -99,7 +99,7 @@ R: {&x="H"} /within grid x, move H right by y
 shp: {-1_#:'*:\x} /shape of x
 b:5 6#"........................s.TH.." /example board
 e:";"\"R 4;U 4;L 3;D 1;R 4;D 1;L 5;R 2" /example moves
-
+/TODO finish d9
 
 \d d10
 n:0
@@ -134,17 +134,13 @@ p2: ".#"0N 40#{+/'x='(!3)+/:40!!#x}@c
 \d d16
 \d d17
 \d d18
-
-g: {(3#2+|//x)#0} /make a grid
-d3: {(x;+'x;++'x)}
-s: {+/~~-':'x}
-sim: {.[x;y;:;1]} /3d grid with 1 at each xyz cube location
+g:   {(3#2+|//x)#0} /empty grid
+d3:  {(x;+'x;++'x)}
+s:   {+/~~-':'x} /
+sim: {.[x;y;:;1]} /1 at each cube location
 e:.'" "\"2,2,2 1,2,2 3,2,2 2,1,2 2,3,2 2,2,1 2,2,3 2,2,4 2,2,6 1,2,5 3,2,5 2,1,5 2,3,5"
-+//s'd3 sim/[g e+1;e]
-
++//s'd3 sim/[g e+1;e] /64
 data: .'0:"18.txt"
-
-/ sim: {.[x;y;:;1]}/[gd;data] /simulated environment, each cube location contains a 1
 p1: +//s'd3 sim/[g data+1;data]
 
 
